@@ -15,7 +15,7 @@ public class HttpStatusImageDownloader {
 
 		try {
 			HttpStatusChecker checker = new HttpStatusChecker();
-			URL url = new URL(checker.getStatusImage(code));
+			URL url = new URL("https://http.cat/"+code+".jpg");
 			InputStream in = new BufferedInputStream(url.openStream());
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
 			byte[] buf = new byte[1024];
