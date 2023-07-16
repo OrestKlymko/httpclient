@@ -7,13 +7,12 @@ public class HttpStatusChecker {
 	private HttpURLConnection connection;
 
 	public String getStatusImage(int code) throws Exception {
+		String urlResult = "";
 		try {
-
 			URL url = new URL("https://http.cat/"+code+".jpg");
 			connection = (HttpURLConnection)url.openConnection();
 			connection.setRequestMethod("GET");
-			int statusCode = connection.getResponseCode();
-			if (statusCode <400) return url.toString();
+			if (connection.getResponseCode()==200) urlResult=url.toString();
 			connection.connect();
 
 		}catch (Exception e){
@@ -22,6 +21,6 @@ public class HttpStatusChecker {
 		}finally {
 			connection.disconnect();
 		}
-		return "Image not found";
+		return urlResult;
 	}
 }
