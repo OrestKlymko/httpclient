@@ -7,7 +7,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
-
 public class HttpStatusImageDownloader {
 	private HttpURLConnection connection;
 
@@ -15,7 +14,7 @@ public class HttpStatusImageDownloader {
 
 		try {
 			HttpStatusChecker checker = new HttpStatusChecker();
-			URL url = new URL("https://http.cat/"+code+".jpg");
+			URL url = new URL(checker.getStatusImage(code));
 			InputStream in = new BufferedInputStream(url.openStream());
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
 			byte[] buf = new byte[1024];
@@ -35,5 +34,9 @@ public class HttpStatusImageDownloader {
 			throw new RuntimeException("Image not found");
 		}
 
+
 	}
 }
+
+
+
