@@ -7,18 +7,17 @@ public class HttpStatusChecker {
 	private HttpURLConnection connection;
 
 	public String getStatusImage(int code) throws Exception {
+		URL url = new URL("https://http.cat/"+code+".jpg");
+		connection = (HttpURLConnection)url.openConnection();
+		connection.setRequestMethod("GET");
+		connection.connect();
+		connection.disconnect();
 
-		try {
-			URL url = new URL("https://http.cat/"+code+".jpg");
-			connection = (HttpURLConnection)url.openConnection();
-			connection.setRequestMethod("GET");
-			connection.connect();
+		if(connection.getResponseCode()==200) {
 			return url.toString();
-		}catch (Exception e){
-			throw new RuntimeException("Image not found");
-		}finally {
-			connection.disconnect();
 		}
-
+		else {
+			throw new RuntimeException("Image not found");
+		}
 	}
 }

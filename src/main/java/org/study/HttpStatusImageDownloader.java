@@ -28,13 +28,15 @@ public class HttpStatusImageDownloader {
 			in.close();
 			InputStream inDocWrite = url.openStream();
 			Files.copy(inDocWrite, Paths.get("src/main/resources/"+code+".jpg"));
-
-
 		} catch (Exception e) {
-			throw new RuntimeException("Image not found");
+			throw new RuntimeException("Image not found",e);
 		}
 
 
+	}
+	public static void main(String[] args) throws IOException {
+			HttpStatusImageDownloader httpStatusImageDownloader = new HttpStatusImageDownloader();
+			httpStatusImageDownloader.downloadStatusImage(2300);
 	}
 }
 
